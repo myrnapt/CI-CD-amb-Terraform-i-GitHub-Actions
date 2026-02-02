@@ -1,4 +1,3 @@
-# Rama prerelease separada de la principal 
-![](/assets/monkey-spinning.gif)
-# 🙏
+# Rama principal de momento aquí no hay mucho que ver 
+## 🙏
 ![](/assets/pedrito.jpg)
