@@ -8,4 +8,3 @@
 *.pem
 .env
 .DS_Store
-bootstrap/
