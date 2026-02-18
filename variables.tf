@@ -9,17 +9,6 @@ variable "project_name" {
   description = "Name of the project"
   default     = "pt1-6"
 }
-variable "private_instance_count" {
-  type        = number
-  description = "n private subnets"
-  default     = 2
-}
-
-variable "allowed_ip" {
-  type = string
-  description = "Allowed IP for SSH"
-  default = "0.0.0.0/0" 
-}
 
 variable "instance_type" {
   type        = string
@@ -43,4 +32,20 @@ variable "key_name" {
   type        = string
   description = "SSH Key_Name"
   default     = "vockey"
+}
+
+variable "cluster_name" {
+  type    = string
+  default = "democluster"
+}
+
+# Rols “de lab” (segons PDF)
+variable "eks_cluster_role_name" {
+  type    = string
+  default = "LabEksClusterRole"
+}
+
+variable "eks_node_role_name" {
+  type    = string
+  default = "LabEksNodeRole"
 }
