@@ -1,4 +1,4 @@
-name: Terraform CI
+name: Terraform CIA
 
 on:
   pull_request:
