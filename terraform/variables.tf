@@ -16,9 +16,9 @@ variable "private_instance_count" {
 }
 
 variable "allowed_ip" {
-  type = string
+  type        = string
   description = "Allowed IP for SSH"
-  default = "0.0.0.0/0" 
+  default     = "0.0.0.0/0"
 }
 
 variable "instance_type" {
