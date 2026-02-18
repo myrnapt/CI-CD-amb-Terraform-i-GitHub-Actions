@@ -28,3 +28,4 @@ Automatitzar la validació, revisió i desplegament de la infraestructura mitjan
 ## Autors
 Projecte realitzat com a pràctica de CI/CD amb Terraform i GitHub Actions.
 
+git add .
