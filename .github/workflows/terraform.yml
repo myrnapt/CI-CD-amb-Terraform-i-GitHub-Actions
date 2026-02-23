@@ -45,25 +45,8 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -no-color > plan_logs.txt # Mejora legibilidad logs y los guarda en un archivo
                                         # Se guarda dentro de la carpeta terraform
-      - name: Comentario del plan de Terraform en la PR
-        # Solo se ejecuta si es una PR
-        if: github.event_name == 'pull_request'
+      - name: Test github script
         uses: actions/github-script@v7
         with:
           script: |
-            // Módulo para leer archivos
-            const fs = require('fs');
-
-            // Leer el contenido del archivo del plan
-            const plan = fs.readFileSync('terraform/plan_logs.txt', 'utf8');
-
-            // Formatear el cuerpo del comentario con el plan de Terraform
-            const body = `### Terraform Plan\n\`\`\`\n${plan}\n\`\`\``;
-
-            // Llamar a la API de GitHub para crear el comentario
-            github.rest.issues.createComment({
-              issue_number: context.payload.pull_request.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: body
-            });
+            console.log("Script working");
