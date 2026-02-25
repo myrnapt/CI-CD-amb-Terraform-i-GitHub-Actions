@@ -8,3 +8,7 @@ data "aws_availability_zones" "available" {
 # git commit -m "Fix formatting"
 # git push
  # vamo a probar otro coment
+
+ #git fetch origin
+
+# git pull origin main
