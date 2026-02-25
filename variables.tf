@@ -38,14 +38,3 @@ variable "cluster_name" {
   type    = string
   default = "democluster"
 }
-
-# Rols “de lab” (segons PDF)
-variable "eks_cluster_role_name" {
-  type    = string
-  default = "LabEksClusterRole"
-}
-
-variable "eks_node_role_name" {
-  type    = string
-  default = "LabEksNodeRole"
-}
