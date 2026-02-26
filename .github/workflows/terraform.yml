@@ -5,6 +5,11 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
 jobs:
   # Define en que versión de ubuntu se va a ejecutar el job
   terraform:
