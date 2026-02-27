@@ -34,7 +34,7 @@ variable "key_name" {
   default     = "vockey"
 }
 
-variable "dummy" {
-    type = string
-    default = "value"
+variable "cluster_name" {
+  type    = string
+  default = "democluster"
 }
