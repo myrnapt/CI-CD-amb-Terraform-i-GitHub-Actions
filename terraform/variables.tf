@@ -35,6 +35,6 @@ variable "key_name" {
 }
 
 variable "cluster_name" {
-    type = string
-    default = "democluster"
+  type    = string
+  default = "democluster"
 }
