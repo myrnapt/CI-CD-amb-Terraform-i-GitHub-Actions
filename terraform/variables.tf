@@ -38,3 +38,9 @@ variable "cluster_name" {
   type    = string
   default = "democluster"
 }
+
+variable "ci_smoke_test" {
+  type        = string
+  description = "Variable only to test CI workflow (not used in resources)"
+  default     = "ok"
+}
