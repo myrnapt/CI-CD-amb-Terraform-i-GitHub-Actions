@@ -39,3 +39,7 @@ variable "cluster_name" {
   default = "democluster"
 }
 
+variable "dummy" {
+  type    = string
+  default = "prueba"
+}
