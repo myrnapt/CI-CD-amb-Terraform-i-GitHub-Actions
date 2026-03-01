@@ -4,7 +4,7 @@ provider "aws" {
 
 # --- S3 BUCKET ---
 resource "aws_s3_bucket" "backend_bucket" {
-  bucket = "fila2-terraform-state-2026-project" 
+  bucket = "terraform-state-364931100987-project" 
   # Evita borrarlo por accidente
   lifecycle {
     prevent_destroy = true

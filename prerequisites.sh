@@ -24,4 +24,4 @@ sudo usermod -aG docker $USER
 newgrp docker
 docker ps
 
-docker login -u jsa5214
+# docker login -u jsa5214

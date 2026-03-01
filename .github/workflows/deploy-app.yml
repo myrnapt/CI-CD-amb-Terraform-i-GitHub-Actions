@@ -1,0 +1,54 @@
+name: Deploy App CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'demo-app/**'
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./demo-app
+          file: ./demo-app/Dockerfile
+          push: true
+          tags: jsa5214/lb-demo:latest
+
+      - name: Configurar credenciales AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: us-east-1
+
+      - name: Actualizar Kubeconfig
+        run: aws eks update-kubeconfig --region us-east-1 --name democluster
+
+      - name: Desplegar en Kubernetes
+        run: |
+          # Aplicamos los manifiestos
+          kubectl apply -f demo-app/k8s-manifest.yaml
+          
+          # Forzamos a Kubernetes a recargar los pods para asegurarse de que usan la imagen "latest" recién subida
+          kubectl rollout restart deployment load-balancer-demo
+          
+          # Esperamos a que el despliegue termine
+          kubectl rollout status deployment load-balancer-demo
