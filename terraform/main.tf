@@ -195,20 +195,7 @@ resource "aws_route_table_association" "private" {
 }
 
 
-# -------------------------
-# OUTPUTS (útil para módulos/depuración)
-# -------------------------
-output "vpc_id" {
-  value = aws_vpc.main.id
-}
 
-output "public_subnets" {
-  value = [for s in aws_subnet.public : s.id]
-}
-
-output "private_subnets" {
-  value = [for s in aws_subnet.private : s.id]
-}
 
 
 # ============================================================
@@ -258,13 +245,13 @@ resource "aws_eks_node_group" "workers" {
 
   # Auto Scaling básico del nodegroup
   scaling_config {
-    desired_size = 2
-    min_size     = 2
-    max_size     = 3
+    desired_size = var.node_desired_size
+    min_size     = var.node_min_size
+    max_size     = var.node_max_size
   }
 
   # Tipo de instancia para nodos (coste/rendimiento)
-  instance_types = ["t3.medium"]
+  instance_types = [var.instance_type]
 }
 
 

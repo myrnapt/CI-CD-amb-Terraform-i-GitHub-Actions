@@ -35,7 +35,7 @@ jobs:
           context: ./demo-app
           file: ./demo-app/Dockerfile # Se guarda dentro de la carpeta demo-app
           push: true
-          tags: jsa5214/lb-demo:latest
+          tags: jsa5214/lb-demo:${{ github.sha }},jsa5214/lb-demo:latest
 
       # Configurar las credenciales de AWS utilizando los secretos almacenados en GitHub
       - name: Configurar credenciales AWS
@@ -53,11 +53,11 @@ jobs:
       # Ejecutar comandos de Kubernetes para desplegar la app y recargarla en caso de actualización
       - name: Desplegar en Kubernetes
         run: |
-          # Aplicamos los manifiestos
+          # Sustituimos el tag "latest" genérico por el hash exacto del commit que acaba de hacer push
+          sed -i "s|jsa5214/lb-demo:latest|jsa5214/lb-demo:${{ github.sha }}|g" demo-app/k8s-manifest.yaml
+          
+          # Aplicamos los manifiestos parcheados con el nuevo id de la imagen
           kubectl apply -f demo-app/k8s-manifest.yaml
-          
-          # Forzamos a Kubernetes a recargar los pods para asegurarse de que usan la imagen "latest" recién subida
-          kubectl rollout restart deployment load-balancer-demo
-          
-          # Esperamos a que el despliegue termine
+                    
+          # Esperamos a que el despliegue de la nueva versión termine (Kubernetes hace un Rolling Update seguro al detectar el cambio de versión en el yaml)
           kubectl rollout status deployment load-balancer-demo

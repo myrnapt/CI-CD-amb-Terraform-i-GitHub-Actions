@@ -1,25 +1,7 @@
 variable "region" {
   type        = string
-  description = "AWS region (us-east-1 by default)"
+  description = "AWS region"
   default     = "us-east-1"
-}
-
-variable "project_name" {
-  type        = string
-  description = "Name of the project"
-  default     = "pt1-6"
-}
-
-variable "instance_type" {
-  type        = string
-  description = "Type of instance (t3.micro by default)"
-  default     = "t3.micro"
-}
-
-variable "instance_ami" {
-  type        = string
-  description = "AMI ID for the instance (Amazon Linux 2 by default)"
-  default     = "ami-052064a798f08f0d3"
 }
 
 variable "vpc_cidr" {
@@ -28,18 +10,32 @@ variable "vpc_cidr" {
   default     = "10.0.0.0/16"
 }
 
-variable "key_name" {
-  type        = string
-  description = "SSH Key_Name"
-  default     = "vockey"
-}
-
 variable "cluster_name" {
-  type    = string
-  default = "democluster"
+  type        = string
+  description = "Name of the EKS cluster"
+  default     = "democluster"
 }
 
-variable "dummy" {
-  type    = string
-  default = "prueba"
+variable "instance_type" {
+  type        = string
+  description = "EC2 instance type for EKS worker nodes"
+  default     = "t3.medium"
+}
+
+variable "node_desired_size" {
+  type        = number
+  description = "Desired number of worker nodes"
+  default     = 2
+}
+
+variable "node_min_size" {
+  type        = number
+  description = "Minimum number of worker nodes"
+  default     = 2
+}
+
+variable "node_max_size" {
+  type        = number
+  description = "Maximum number of worker nodes"
+  default     = 3
 }
