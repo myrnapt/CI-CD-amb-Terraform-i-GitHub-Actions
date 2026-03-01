@@ -44,7 +44,7 @@ locals {
   # Toma el primer ARN encontrado para el rol del cluster y del nodegroup.
   # IMPORTANTE: si hubiera más de uno, esto "elige el primero" sin garantizar cuál.
   # En entornos reales conviene filtrar mejor o referenciar un rol exacto.
-  
+
   # eks_cluster_role_arn = tolist(data.aws_iam_roles.cluster_roles.arns)[0]
   # eks_node_role_arn    = tolist(data.aws_iam_roles.node_roles.arns)[0]
 
