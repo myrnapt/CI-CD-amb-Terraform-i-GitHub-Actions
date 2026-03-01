@@ -45,5 +45,4 @@ echo -e "${YELLOW}➡️  http://$LB_HOSTNAME${NC}"
 echo ""
 echo -e "${YELLOW}⚠️ Nota: AWS puede tardar hasta 3 minutos adicionales en propagar el DNS.${NC}"
 echo "Si la página no carga inmediatamente al hacer click, espera un poco y recarga."
-echo ""
-echo "¡Mucha suerte con tu presentación! 🎤✨"
+
