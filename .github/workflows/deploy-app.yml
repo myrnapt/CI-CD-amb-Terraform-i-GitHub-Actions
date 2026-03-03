@@ -40,7 +40,9 @@ jobs:
           context: ./demo-app
           file: ./demo-app/Dockerfile # Se guarda dentro de la carpeta demo-app
           push: true
-          tags: jsa5214/lb-demo:${{ github.sha }},jsa5214/lb-demo:latest
+          tags: >-
+            jsa5214/lb-demo:${{ github.sha }},
+            jsa5214/lb-demo:latest
 
       # Configurar las credenciales de AWS utilizando los secretos almacenados en GitHub
       - name: Configurar credenciales AWS

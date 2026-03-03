@@ -30,7 +30,7 @@ echo ""
 
 # 3. Comprobar Nodos EC2 (Workers de EKS)
 echo "👉 [3/5] Verificando Nodos EC2 (Workers)..."
-NODES=$(kubectl get nodes --no-headers 2>/dev/null | grep -i ready | wc -l)
+NODES=$(kubectl get nodes --no-headers 2>/dev/null | grep -w Ready | wc -l)
 if [ "$NODES" -ge 2 ]; then
     echo "✅ Se han detectado $NODES Nodos operando en estado 'Ready'."
 else
@@ -50,7 +50,7 @@ echo ""
 
 # 5. Comprobar y obtener la URL Pública del Balanceador
 echo "👉 [5/5] Obteniendo el Balanceador de Carga (NLB)..."
-URL=$(kubectl get svc lb-demo-service -o jsonpath='{.status.loadBalancer.ingress[0].hostname}' 2>/dev/null)
+URL=$(kubectl get svc lb-demo-svc -o jsonpath='{.status.loadBalancer.ingress[0].hostname}' 2>/dev/null)
 
 if [ -n "$URL" ]; then
     echo "✅ Balanceador de carga desplegado con éxito."
