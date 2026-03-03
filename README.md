@@ -1,5 +1,4 @@
 actionlint
-==========
 [![CI Badge][]][CI]
 [![API Document][api-badge]][apidoc]
 
@@ -48,6 +47,41 @@ jobs:
         if: ${{ github.repository.permissions.admin == true }}
       - run: npm install && npm test
 ```
+Enlace a la presentacion: https://www.canva.com/design/DAHCWO3CW2g/7iNT4P3TbEyAmkr4xNDy5A/edit?utm_content=DAHCWO3CW2g&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+# 🚀 CI/CD con Terraform y GitHub Actions
+
+[![Terraform CI/CD](https://github.com/Proyecto-Cloud/CI-CD-amb-Terraform-i-GitHub-Actions/actions/workflows/terraform.yml/badge.svg)](https://github.com/Proyecto-Cloud/CI-CD-amb-Terraform-i-GitHub-Actions/actions/workflows/terraform.yml)
+[![App CI/CD](https://github.com/Proyecto-Cloud/CI-CD-amb-Terraform-i-GitHub-Actions/actions/workflows/deploy-app.yml/badge.svg)](https://github.com/Proyecto-Cloud/CI-CD-amb-Terraform-i-GitHub-Actions/actions/workflows/deploy-app.yml)
+
+Este proyecto implementa un flujo **CI/CD automatizado y desacoplado** para desplegar infraestructura en **AWS** utilizando **Terraform** y una aplicación web en **Kubernetes (EKS)**, todo orquestado mediante **GitHub Actions** siguiendo buenas prácticas.
+
+---
+
+## 🎯 Objetivo
+Automatizar la validación, revisión y despliegue, tanto de la infraestructura como del software, mediante Pull Requests. De esta manera se evitan cambios manuales directos y errores en producción, asegurando un entorno robusto, trazable y reproducible.
+
+---
+
+## 🏗️ Arquitectura del Proyecto
+
+El repositorio está dividido lógicamente en dos partes independientes, cada una con su propio ciclo de vida:
+
+### 1. Infraestructura como Código (Terraform)
+Despliega toda la base necesaria en AWS para soportar la aplicación:
+- **Red**: VPC, Subnets Públicas/Privadas, Internet Gateway y NAT Gateway.
+- **Cómputo**: Clúster de Amazon EKS (`democluster`) con un Node Group de máquinas `t3.medium`.
+- **Seguridad**: Security Groups para el *Control Plane* de Kubernetes y comunicación node-pod.
+
+### 2. Aplicación de Demostración (`demo-app/`)
+Una aplicación web programada en **Python (Flask)**:
+- Genera una interfaz visual que varía dependiendo del pod donde se está ejecutando.
+- Se empaqueta en **Docker** y se escala a 3 réplicas en EKS.
+- Expuesta mediante un manifiesto de `Service` de tipo LoadBalancer que crea automáticamente un **Network Load Balancer (NLB)** de AWS para evidenciar el balanceo de carga visualmente.
+
+---
+
+
+## 🚀 Flujo de trabajo (CI/CD)
 
 **actionlint reports 7 errors:**
 
